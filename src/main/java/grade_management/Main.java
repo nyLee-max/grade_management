@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import grade_management.dto.Student;
 import grade_management.service.SearchService;
 import grade_management.ui.ScoreManagerUI;
+import grade_management.ui.SearchManagerUI;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ public class Main extends JFrame implements ActionListener {
 	private JButton btnScore;
 	private StudentTablePanel pList;
 	private SearchService service;
+	private JButton btnAll;
 
 	/**
 	 * Launch the application.
@@ -64,7 +66,8 @@ public class Main extends JFrame implements ActionListener {
 		btnScore.addActionListener(this);
 		pBtns.add(btnScore);
 
-		JButton btnAll = new JButton("분반별성적확인");
+		btnAll = new JButton("분반별성적확인");
+		btnAll.addActionListener(this);
 		pBtns.add(btnAll);
 
 		JButton btnNewButton_2 = new JButton("전체성적확인");
@@ -76,6 +79,9 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAll) {
+			actionPerformedBtnAll(e);
+		}
 		if (e.getSource() == btnScore) {
 			actionPerformedBtnNewButton(e);
 		}
@@ -84,13 +90,16 @@ public class Main extends JFrame implements ActionListener {
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		ScoreManagerUI frame = new ScoreManagerUI();
 		frame.setVisible(true);
-		pList.getItem().getStdNo();
 		System.out.println("pList.getItem().getStdNo() " + pList.getItem().getStdNo());
 		Student item = service.showStudentBystdNo(new Student(pList.getItem().getStdNo()));
 		frame.getpLeftPanel().setItem(item);
 		
-		
+	
 	
 
+	}
+	protected void actionPerformedBtnAll(ActionEvent e) {
+		SearchManagerUI frame = new SearchManagerUI();
+		frame.setVisible(true);
 	}
 }

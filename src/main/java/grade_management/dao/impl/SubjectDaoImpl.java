@@ -41,6 +41,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		return null;
 	}
 
+	
 	private Subject getSubject(ResultSet rs) throws SQLException {
 		int subNo = rs.getInt("subNo");
 		String subName = rs.getString("subName");
@@ -87,6 +88,32 @@ public class SubjectDaoImpl implements SubjectDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public List<Subject> selectSubjectName() {
+		String sql = "select subName from subject";
+		try(Connection con = JdbcConn.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();){
+
+			if(rs.next()) {
+				List<Subject> list = new ArrayList<>();
+				do {
+					list.add(getSubjectName(rs));
+				}while(rs.next());
+				return list;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private Subject getSubjectName(ResultSet rs) throws SQLException {
+		String subName = rs.getString("subName");
+		return new Subject(subName);
 	}
 
 }

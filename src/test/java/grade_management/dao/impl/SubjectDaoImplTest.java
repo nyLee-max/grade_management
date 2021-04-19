@@ -47,5 +47,13 @@ public class SubjectDaoImplTest {
 		Assert.assertEquals(1, res);
 		dao.selectSubjectByAll().stream().forEach(System.out::println);
 	}
+	
+	@Test
+	public void test05SelectSubjectName() {
+		System.out.printf("%s%n", "test05SelectSubjectName");
+		List<Subject> list = dao.selectSubjectName();
+		Assert.assertNotNull(list);
+		list.stream().forEach(System.out::println);
+	}
 
 }

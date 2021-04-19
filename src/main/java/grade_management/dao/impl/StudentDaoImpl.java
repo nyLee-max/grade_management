@@ -151,7 +151,10 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public Student selectStudent(Student student) {
-		String sql = "select stdNo, classCode, stdName, enterDate from student where stdNo = ?";
+		String sql = "select stdNo, stdName, classCode, enterDate, PhotoName, stdPhoto,"
+				+ " subj4, subj국어, 국어, subj5, subj영어, 영어, subj6, subj수학, 수학, subj7, subj사회, 사회, "
+				+ " subj8, subj과학, 과학, 합계, 평균,"
+				+ " enterDate from vw_student_table where stdNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, student.getStdNo());
 			try (ResultSet rs = pstmt.executeQuery()) {

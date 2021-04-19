@@ -13,6 +13,10 @@ public class Subject {
 		this.subName = subName;
 	}
 	
+	public Subject(String subName) {
+		this.subName = subName;
+	}
+
 	public Subject(int subNo) {
 		this.subNo = subNo;
 	}
@@ -27,6 +31,12 @@ public class Subject {
 	}
 	public void setSubName(String subName) {
 		this.subName = subName;
+	}
+
+	
+	@Override
+	public String toString() {
+		return String.format("Subject [subNo=%s, subName=%s]", subNo, subName);
 	}
 
 	@Override
