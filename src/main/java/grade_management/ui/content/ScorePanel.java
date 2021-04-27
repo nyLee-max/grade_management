@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import grade_management.dto.Score;
 import grade_management.dto.Student;
+import grade_management.dto.StudentScoreAll;
 import grade_management.service.SearchService;
 
 public class ScorePanel extends JPanel {
@@ -72,12 +73,13 @@ public class ScorePanel extends JPanel {
 		tfSci.setText("");
 	}
 
-	public void setItem(Student item) {
-		tfKor.setText(item.getScore().get(0).getStdScore() + "");
-		tfEng.setText(item.getScore().get(1).getStdScore() + "");
-		tfMath.setText(item.getScore().get(2).getStdScore() + "");
-		tfSoc.setText(item.getScore().get(3).getStdScore() + "");
-		tfSci.setText(item.getScore().get(4).getStdScore() + "");
+	public void setItem(StudentScoreAll item) {
+		tfKor.setText(item.getKor()+"");
+		tfEng.setText(item.getEng()+"");
+		tfMath.setText(item.getMath()+"");
+		tfSoc.setText(item.getSoc()+"");
+		tfSci.setText(item.getSci()+"");
+	
 	}
 
 	public Score getKor() {
@@ -110,5 +112,14 @@ public class ScorePanel extends JPanel {
 		return new Score(sci);
 	}
 	
+	public StudentScoreAll getItem() {
+		int kor = Integer.parseInt(tfKor.getText().trim());
+		int eng = Integer.parseInt(tfEng.getText().trim());
+		int math = Integer.parseInt(tfMath.getText().trim());
+		int soc = Integer.parseInt(tfSoc.getText().trim());
+		int sci = Integer.parseInt(tfSci.getText().trim());
+		return new StudentScoreAll(kor, eng, math, soc, sci);
+	}
 	
+
 }

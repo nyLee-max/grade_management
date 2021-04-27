@@ -16,7 +16,6 @@ public class Score {
 		this.stdScore = stdScore;
 	}
 
-
 	public Score(Subject subNo) {
 		this.subNo = subNo;
 	}

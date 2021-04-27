@@ -8,6 +8,7 @@ public interface StudentDao {
 	List<Student> selectStudentByAll();
 	List<Student> selectStudentByclassCode(Student student);
 	Student selectStudent(Student student);
+	List<Student> selectStudentTable(Student student);
 	
 	int insertStudent(Student student);
 	int updateStudent(Student student);

@@ -12,13 +12,50 @@ public class Student {
 	private String PhotoName;
 	private Blob stdPhoto;
 	private List<Score> score;
+	private int avg;
 
-	
+	public Student(int stdNo, Ban classCode, String stdName, Date enterDate, String photoName, Blob stdPhoto,
+			List<Score> score, int avg) {
+		this.stdNo = stdNo;
+		this.classCode = classCode;
+		this.stdName = stdName;
+		this.enterDate = enterDate;
+		PhotoName = photoName;
+		this.stdPhoto = stdPhoto;
+		this.score = score;
+		this.avg = avg;
+	}
+
+	public Student(int stdNo, Ban classCode, String stdName, List<Score> score, int avg) {
+		this.stdNo = stdNo;
+		this.classCode = classCode;
+		this.stdName = stdName;
+		this.score = score;
+		this.avg = avg;
+	}
+
+	public int getAvg() {
+		return avg;
+	}
+
+	public void setAvg(int avg) {
+		this.avg = avg;
+	}
+
 	public Student(int stdNo, Ban classCode, String stdName, Date enterDate) {
 		this.stdNo = stdNo;
 		this.classCode = classCode;
 		this.stdName = stdName;
 		this.enterDate = enterDate;
+	}
+
+
+
+	public Student(int stdNo, Ban classCode, String stdName, List<Score> score) {
+		this.stdNo = stdNo;
+		this.classCode = classCode;
+		this.stdName = stdName;
+		this.score = score;
 	}
 
 
@@ -85,8 +122,6 @@ public class Student {
 		return classCode;
 	}
 	
-
-
 	public void setClassCode(Ban classCode) {
 		this.classCode = classCode;
 	}

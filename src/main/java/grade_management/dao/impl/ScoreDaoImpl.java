@@ -139,6 +139,30 @@ public class ScoreDaoImpl implements ScoreDao {
 		return null;
 	}
 
+	@Override
+	public List<Score> selectstdScoreBysubNo(Subject subject) {
+		String sql = "select stdScore from score where subNo = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, subject.getSubNo());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					List<Score> list = new ArrayList<>();
+					do {
+						list.add(getstdScore(rs));
+					}while(rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	private Score getstdScore(ResultSet rs) throws SQLException {
+		int stdScore = rs.getInt("stdScore");
+		return new Score(stdScore);
+	}
 
 }

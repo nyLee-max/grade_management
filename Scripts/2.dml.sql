@@ -201,3 +201,4 @@ select * from score where stdNo = 20001;
 select * from student WHERE stdNo = 4545;
 select * from subject;
  
+select stdNo, stdName, classCode, 국어, 영어, 수학, 사회, 과학, 평균 from vw_student_table where classCode = 'A01';

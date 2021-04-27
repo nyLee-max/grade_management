@@ -1,8 +1,11 @@
 package grade_management.ui.list;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 import grade_management.dto.Student;
+import grade_management.dto.StudentScoreAll;
 import grade_management.service.SearchService;
 import grade_management.ui.exception.NotSelectedException;
 
@@ -16,8 +19,11 @@ public class StudentTablePanel extends AbstractCustomTablePanel<Student> {
 	@Override
 	public void initList() {
 		list = service.showStudent();
-		System.out.println(list);
+		System.out.println("initList " + list);
 	}
+	
+
+	
 	@Override
 	protected void setAlighAndwidth() {
 		// 컬럼내용 정렬
@@ -54,5 +60,4 @@ public class StudentTablePanel extends AbstractCustomTablePanel<Student> {
 		return list.get(list.indexOf(new Student(StdNo)));
 	}
 
-	
 }

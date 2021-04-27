@@ -1,77 +1,61 @@
 package grade_management.ui;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.EventQueue;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import grade_management.dto.Ban;
+import java.awt.GridLayout;
+import grade_management.ui.list.StudentScoreTablePanel;
+import grade_management.ui.content.avgPanel;
 import grade_management.dto.Score;
 import grade_management.dto.StudentScoreAll;
 import grade_management.dto.Subject;
+import grade_management.service.SearchAllService;
 import grade_management.service.SearchService;
-import grade_management.ui.content.SearchPanel;
-import grade_management.ui.list.StudentScoreTablePanel;
-import grade_management.ui.list.StudentTablePanel;
-import grade_management.ui.content.avgPanel;
+import grade_management.ui.content.ScoreAllPanel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
-public class SearchManagerUI extends JFrame implements ActionListener {
+public class SearchAllManagerUI extends JFrame implements ActionListener {
 
-	private SearchPanel contentPane;
-	private SearchService service;
+	private JPanel contentPane;
+	private SearchAllService service;
 	private StudentScoreTablePanel pList;
-	private JButton btnArray;
-	private JPanel panel;
-	private SearchPanel pContent;
-	private JPanel panel_3;
-	private JButton btnSel;
+	private JButton btnNewButton;
+	private ScoreAllPanel pContent;
+	
+	private List<StudentScoreAll> list;
+	private SearchService searchService;
 	private avgPanel avgPanel;
 	
-
-	public SearchManagerUI() {
+	public SearchAllManagerUI() {
+		searchService = new SearchService();
+		list = searchService.showStudentScoreByAll();
 		setService();
 		initialize();
 	}
 
-	protected void setService() {
-		service = new SearchService();
+	private void setService() {
+		service = new SearchAllService();
+
 	}
 
 	private void initialize() {
-		setTitle("분반별성적확인");
+		setTitle("전체성적확인");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 615, 470);
-		contentPane = new SearchPanel();
+		setBounds(100, 100, 556, 428);
+		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 
 		pList = new StudentScoreTablePanel();
 		pList.loadData();
 		contentPane.add(pList, BorderLayout.CENTER);
-
-		panel = new JPanel();
-		pList.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
-
-		pContent = new SearchPanel();
-		panel.add(pContent);
-
-		panel_3 = new JPanel();
-		panel.add(panel_3);
-
-		btnSel = new JButton("정렬");
-		btnSel.addActionListener(this);
-		panel_3.add(btnSel);
 
 		avgPanel = new avgPanel();
 		List<Score> korlist = service.showStdScoreBySubNo(new Subject(1));
@@ -113,34 +97,41 @@ public class SearchManagerUI extends JFrame implements ActionListener {
 		}
 		
 		avgPanel.getTfSci().setText(scisum/scilist.size()+"");
+		pList.add(avgPanel, BorderLayout.SOUTH);
+
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		contentPane.add(avgPanel, BorderLayout.SOUTH);
-		
-		avgPanel.setLayout(new BoxLayout(avgPanel, BoxLayout.X_AXIS));
+		pContent = new ScoreAllPanel();
+		pContent.getTextField().setText(list.size()+"");
+		panel.add(pContent);
+
+		JPanel panel_3 = new JPanel();
+		panel.add(panel_3);
+
+		btnNewButton = new JButton("조회");
+		btnNewButton.addActionListener(this);
+		panel_3.add(btnNewButton);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSel) {
-			actionPerformedBtnSel(e);
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(e);
 		}
 	}
-
-	protected void actionPerformedBtnSel(ActionEvent e) {
-		Ban ban = pContent.getBan();
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		Subject subject = pContent.getSubject();
-		if (ban != null && subject != null) {
-			List<StudentScoreAll> stdList = service.showStudentScoreByBanSubject(ban, subject);
-			pList.setInitList(stdList);
-			pList.setList();
-		} else if (ban == null && subject != null) {
+		
+		if(subject != null) {
 			List<StudentScoreAll> stdList = service.showStudentScoreBySubject(subject);
 			pList.setInitList(stdList);
 			pList.setList();
-		} else {
-			List<StudentScoreAll> stdList = service.showStudentScoreByBan(ban);
+		}else {
+			List<StudentScoreAll> stdList = service.showStudentScoreByAvg();
 			pList.setInitList(stdList);
 			pList.setList();
 		}
-
+				
 	}
 }

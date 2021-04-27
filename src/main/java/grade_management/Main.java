@@ -7,14 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import grade_management.dto.Score;
 import grade_management.dto.Student;
+import grade_management.dto.StudentScoreAll;
 import grade_management.service.SearchService;
 import grade_management.ui.ScoreManagerUI;
+import grade_management.ui.SearchAllManagerUI;
 import grade_management.ui.SearchManagerUI;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import grade_management.ui.list.StudentTablePanel;
 
@@ -25,10 +29,8 @@ public class Main extends JFrame implements ActionListener {
 	private StudentTablePanel pList;
 	private SearchService service;
 	private JButton btnAll;
+	private JButton btnNewButton;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,8 +72,9 @@ public class Main extends JFrame implements ActionListener {
 		btnAll.addActionListener(this);
 		pBtns.add(btnAll);
 
-		JButton btnNewButton_2 = new JButton("전체성적확인");
-		pBtns.add(btnNewButton_2);
+		btnNewButton = new JButton("전체성적확인");
+		btnNewButton.addActionListener(this);
+		pBtns.add(btnNewButton);
 
 		pList = new StudentTablePanel();
 		pList.loadData();
@@ -79,27 +82,39 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton_2(e);
+		}
 		if (e.getSource() == btnAll) {
 			actionPerformedBtnAll(e);
 		}
 		if (e.getSource() == btnScore) {
 			actionPerformedBtnNewButton(e);
 		}
+
 	}
 
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		ScoreManagerUI frame = new ScoreManagerUI();
 		frame.setVisible(true);
-		System.out.println("pList.getItem().getStdNo() " + pList.getItem().getStdNo());
+
+//		System.out.println("pList.getItem().getStdNo() " + pList.getItem().getStdNo());
 		Student item = service.showStudentBystdNo(new Student(pList.getItem().getStdNo()));
 		frame.getpLeftPanel().setItem(item);
 		
-	
-	
+		StudentScoreAll score = service.showStudentScoreByStdNo(new Student(pList.getItem().getStdNo()));
+		frame.getpRightPanel().setItem(score);
+		frame.setTable(pList);
 
 	}
+
 	protected void actionPerformedBtnAll(ActionEvent e) {
 		SearchManagerUI frame = new SearchManagerUI();
+		frame.setVisible(true);
+	}
+
+	protected void actionPerformedBtnNewButton_2(ActionEvent e) {
+		SearchAllManagerUI frame = new SearchAllManagerUI();
 		frame.setVisible(true);
 	}
 }

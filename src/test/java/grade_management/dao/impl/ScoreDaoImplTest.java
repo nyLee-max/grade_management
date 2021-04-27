@@ -63,12 +63,20 @@ public class ScoreDaoImplTest {
 
 	@Test
 	public void test05SelectScoreBysubNo() {
-		System.out.printf("%s()%n", "test05SelectScoreBysubNo()");
-		
+		System.out.printf("%s()%n", "test05SelectScoreBysubNo");
 		List<Score> scoreList = dao.selectScoreBysubNo(new Subject(5));
 		Assert.assertNotNull(scoreList);
 		
 		scoreList.stream().forEach(System.out::println);
+	}
+	
+	@Test
+	public void test06SelectstdScoreBysubNo() {
+		System.out.printf("%s()%n","test06SelectstdScoreBysubNo");
+		List<Score> scoreList = dao.selectstdScoreBysubNo(new Subject(1));
+		Assert.assertNotNull(scoreList);
+		scoreList.stream().forEach(System.out::println);
+		
 	}
 
 }

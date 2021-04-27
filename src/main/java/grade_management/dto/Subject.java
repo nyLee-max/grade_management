@@ -36,7 +36,7 @@ public class Subject {
 	
 	@Override
 	public String toString() {
-		return String.format("Subject [subNo=%s, subName=%s]", subNo, subName);
+		return String.format("%s" , subName);
 	}
 
 	@Override

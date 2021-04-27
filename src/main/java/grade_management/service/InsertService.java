@@ -23,4 +23,7 @@ public class InsertService {
 	public void modifyStudent(Student student) {
 		dao.updateStudent(student);
 	}
+	public void modifyScore(Score score) {
+		scoredao.updateScore(score);
+	}
 }

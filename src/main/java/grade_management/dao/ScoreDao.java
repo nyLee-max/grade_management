@@ -16,4 +16,5 @@ public interface ScoreDao {
 	int deleteScore(Score score);
 	
 	List<Score> selectScoreBysubNo(Subject subject);
+	List<Score> selectstdScoreBysubNo(Subject subject);
 }

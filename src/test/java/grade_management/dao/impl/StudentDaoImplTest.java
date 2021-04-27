@@ -1,5 +1,6 @@
 package grade_management.dao.impl;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.sql.Date;
@@ -20,7 +21,7 @@ import grade_management.dto.Student;
 public class StudentDaoImplTest {
 	private static StudentDao dao = StudentDaoImpl.getInstance();
 	
-	@Test
+	//@Test
 	public void test01SelectStudentByAll() {
 		System.out.printf("%s%n", "test01SelectStudentByAll");
 		List<Student> list = dao.selectStudentByAll();
@@ -32,7 +33,7 @@ public class StudentDaoImplTest {
 		 */
 	}
 
-	@Test
+	//@Test
 	public void test02SelectStudentByclassCode() {
 		System.out.printf("%s%n","testSelectStudentByclassCode");
 		List<Student> list = dao.selectStudentByclassCode(new Student(new Ban("A01")));
@@ -41,7 +42,7 @@ public class StudentDaoImplTest {
 		
 	}
 
-	@Test
+	//@Test
 	public void test03InsertStudent() {
 		System.out.printf("%s%n", "testInsertStudent");
 		Student newStudent = new Student(20031, new Ban("A01"), "김상건", new Date(119,3,2));
@@ -52,7 +53,7 @@ public class StudentDaoImplTest {
 		
 	}
 
-	@Test
+	//@Test
 	public void test04UpdateStudent() {
 		System.out.printf("%s%n", "testUpdateStudent");
 		Student newStudent = new Student(20031, new Ban("A02"),"이나연",new Date(120,3,2));
@@ -61,7 +62,7 @@ public class StudentDaoImplTest {
 		System.out.println(dao.selectStudentByclassCode(newStudent));
 	}
 
-	@Test
+	//@Test
 	public void test05DeleteStudent() {
 		System.out.printf("%s%n0", "testDeleteStudent");
 		Student newStudent = new Student(20031);
@@ -70,11 +71,19 @@ public class StudentDaoImplTest {
 		dao.selectStudentByAll().stream().forEach(System.out::println);
 	}
 
-	@Test
+	//@Test
 	public void test06SelectStudent() {
 		System.out.printf("%s%n", "select06Student");
 		Student student = dao.selectStudent(new Student(20001));
 		System.out.println(student);
 		Assert.assertNotNull(student);
+	}
+	
+	@Test
+	public void test07SelectStudentTable() {
+		System.out.printf("%s%n", "test07SelectStudentTable");
+		List<Student> student = dao.selectStudentTable(new Student(new Ban("A01")));
+		Assert.assertNotNull(student);
+		student.stream().forEach(System.out::println);
 	}
 }
