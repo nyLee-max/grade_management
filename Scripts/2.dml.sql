@@ -1,13 +1,13 @@
 grant all on grade.* to 'user_grade'@'localhost' identified by 'rootroot';
 
-use grade;
+use grade2;
 
 select user(), database();
 
 insert into subject 
 	values(1, '국어'), (2, '영어'), (3, '수학'), (4, '사회'), (5, '과학');
 
-insert into class 
+insert into ban
 	values('A01'), ('A02');
 	
 insert into student (stdNo, classCode, stdName, enterDate)

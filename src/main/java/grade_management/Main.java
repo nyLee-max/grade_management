@@ -11,6 +11,7 @@ import grade_management.dto.Score;
 import grade_management.dto.Student;
 import grade_management.dto.StudentScoreAll;
 import grade_management.service.SearchService;
+import grade_management.ui.StudentManagerUI;
 import grade_management.ui.ScoreManagerUI;
 import grade_management.ui.SearchAllManagerUI;
 import grade_management.ui.SearchManagerUI;
@@ -30,6 +31,7 @@ public class Main extends JFrame implements ActionListener {
 	private SearchService service;
 	private JButton btnAll;
 	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,9 +46,7 @@ public class Main extends JFrame implements ActionListener {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Main() {
 		service = new SearchService();
 		initialize();
@@ -64,12 +64,16 @@ public class Main extends JFrame implements ActionListener {
 		JPanel pBtns = new JPanel();
 		contentPane.add(pBtns, BorderLayout.NORTH);
 
-		btnScore = new JButton("학생성적입력");
+		btnScore = new JButton("학생정보입력");
 		btnScore.addActionListener(this);
 		pBtns.add(btnScore);
 
 		btnAll = new JButton("분반별성적확인");
 		btnAll.addActionListener(this);
+		
+		btnNewButton_1 = new JButton("학생성적관리");
+		btnNewButton_1.addActionListener(this);
+		pBtns.add(btnNewButton_1);
 		pBtns.add(btnAll);
 
 		btnNewButton = new JButton("전체성적확인");
@@ -82,6 +86,9 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton_1) {
+			actionPerformedBtnNewButton_1(e);
+		}
 		if (e.getSource() == btnNewButton) {
 			actionPerformedBtnNewButton_2(e);
 		}
@@ -95,15 +102,15 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		ScoreManagerUI frame = new ScoreManagerUI();
+		StudentManagerUI frame = new StudentManagerUI();
 		frame.setVisible(true);
 
 //		System.out.println("pList.getItem().getStdNo() " + pList.getItem().getStdNo());
 		Student item = service.showStudentBystdNo(new Student(pList.getItem().getStdNo()));
 		frame.getpLeftPanel().setItem(item);
 		
-		StudentScoreAll score = service.showStudentScoreByStdNo(new Student(pList.getItem().getStdNo()));
-		frame.getpRightPanel().setItem(score);
+		
+//		frame.getpRightPanel().setItem(score);
 		frame.setTable(pList);
 
 	}
@@ -116,5 +123,13 @@ public class Main extends JFrame implements ActionListener {
 	protected void actionPerformedBtnNewButton_2(ActionEvent e) {
 		SearchAllManagerUI frame = new SearchAllManagerUI();
 		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
+		ScoreManagerUI frame = new ScoreManagerUI();
+		frame.setVisible(true);
+		
+		StudentScoreAll item = service.showStudentScoreByStdNo(new Student(pList.getItem().getStdNo()));
+		frame.getScorePanel().setItem(item);
+		frame.setTable(pList);
 	}
 }

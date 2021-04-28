@@ -5,7 +5,10 @@ public class Subject {
 	private String subName;
 	
 	public Subject() {
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Subject(int subNo) {
+		this.subNo = subNo;
 	}
 	
 	public Subject(int subNo, String subName) {
@@ -17,9 +20,6 @@ public class Subject {
 		this.subName = subName;
 	}
 
-	public Subject(int subNo) {
-		this.subNo = subNo;
-	}
 	public int getSubNo() {
 		return subNo;
 	}
@@ -36,7 +36,7 @@ public class Subject {
 	
 	@Override
 	public String toString() {
-		return String.format("%s" , subName);
+		return String.format("%s" , subNo);
 	}
 
 	@Override

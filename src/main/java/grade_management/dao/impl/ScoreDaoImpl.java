@@ -93,11 +93,11 @@ public class ScoreDaoImpl implements ScoreDao {
 
 	@Override
 	public int updateScore(Score score) {
-		String sql = "update score set subNo = ?, stdScore = ? where stdNo = ?";
+		String sql = "update score set stdScore = ? where stdNo = ? and subNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setInt(1, score.getSubject().getSubNo());
-			pstmt.setInt(2, score.getStdScore());
-			pstmt.setInt(3, score.getStudent().getStdNo());
+			pstmt.setInt(1, score.getStdScore());
+			pstmt.setInt(2, score.getStudent().getStdNo());
+			pstmt.setInt(3, score.getSubject().getSubNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,15 +142,14 @@ public class ScoreDaoImpl implements ScoreDao {
 	@Override
 	public List<Score> selectstdScoreBysubNo(Subject subject) {
 		String sql = "select stdScore from score where subNo = ?";
-		try(Connection con = JdbcConn.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);){
+		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, subject.getSubNo());
-			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs.next()) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
 					List<Score> list = new ArrayList<>();
 					do {
 						list.add(getstdScore(rs));
-					}while(rs.next());
+					} while (rs.next());
 					return list;
 				}
 			}

@@ -76,3 +76,5 @@ public class SearchService {
 		return dao.selectstdScoreBysubNo(subject);
 	}
 }
+	
+

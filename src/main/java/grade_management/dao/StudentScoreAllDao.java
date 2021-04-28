@@ -15,4 +15,5 @@ public interface StudentScoreAllDao {
 	List<StudentScoreAll> selectStudentScoreByBanSubject(Ban ban, Subject subject);
 	StudentScoreAll selectStudentScoreByStdNo(Student student);
 	List<StudentScoreAll> selectStudentScoreByAvg();
+
 }

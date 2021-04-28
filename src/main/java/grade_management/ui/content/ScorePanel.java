@@ -19,6 +19,8 @@ public class ScorePanel extends JPanel {
 	private JTextField tfSci;
 
 	private SearchService service;
+	private JLabel lblstdNo;
+	private JTextField tfstdNo;
 
 
 	public ScorePanel() {
@@ -28,6 +30,13 @@ public class ScorePanel extends JPanel {
 
 	private void initialize() {
 		setLayout(new GridLayout(0, 2, 0, 0));
+		
+		lblstdNo = new JLabel("학번");
+		add(lblstdNo);
+		
+		tfstdNo = new JTextField();
+		tfstdNo.setColumns(10);
+		add(tfstdNo);
 
 		JLabel lblKor = new JLabel("국어");
 		add(lblKor);
@@ -74,42 +83,47 @@ public class ScorePanel extends JPanel {
 	}
 
 	public void setItem(StudentScoreAll item) {
+		tfstdNo.setText(item.getStdNo()+"");
 		tfKor.setText(item.getKor()+"");
 		tfEng.setText(item.getEng()+"");
 		tfMath.setText(item.getMath()+"");
 		tfSoc.setText(item.getSoc()+"");
 		tfSci.setText(item.getSci()+"");
-	
 	}
 
-	public Score getKor() {
+	public int getKor() {
 		int kor = Integer.parseInt(tfKor.getText().trim());
 
-		return new Score(kor);
+		return kor;
 	}
 
-	public Score getEng() {
+	public int getEng() {
 		int eng = Integer.parseInt(tfEng.getText().trim());
 
-		return new Score(eng);
+		return eng;
 	}
 
-	public Score getMath() {
+	public int getMath() {
 		int math = Integer.parseInt(tfMath.getText().trim());
 
-		return new Score(math);
+		return math;
 	}
 
-	public Score getSoc() {
+	public int getSoc() {
 		int soc = Integer.parseInt(tfSoc.getText().trim());
 
-		return new Score(soc);
+		return soc;
 	}
 
-	public Score getSci() {
+	public int getSci() {
 		int sci = Integer.parseInt(tfSci.getText().trim());
 
-		return new Score(sci);
+		return sci;
+	}
+	
+	public Student getStdNo() {
+		int stdNo = Integer.parseInt(tfstdNo.getText().trim());
+		return new Student(stdNo);
 	}
 	
 	public StudentScoreAll getItem() {

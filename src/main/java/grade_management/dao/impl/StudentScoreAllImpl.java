@@ -126,7 +126,7 @@ public class StudentScoreAllImpl implements StudentScoreAllDao {
 
 	@Override
 	public StudentScoreAll selectStudentScoreByStdNo(Student student) {
-		String sql = "select 국어, 영어, 수학, 사회, 과학 from vw_student_table where stdNo = ?";
+		String sql = "select stdNo, 국어, 영어, 수학, 사회, 과학 from vw_student_table where stdNo = ?";
 		try (Connection con = JdbcConn.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, student.getStdNo());
 			try (ResultSet rs = pstmt.executeQuery();) {
@@ -142,12 +142,13 @@ public class StudentScoreAllImpl implements StudentScoreAllDao {
 	}
 
 	private StudentScoreAll getScore(ResultSet rs) throws SQLException {
+		int stdNo = rs.getInt("stdNo");
 		int kor = rs.getInt("국어");
 		int eng = rs.getInt("영어");
 		int math = rs.getInt("수학");
 		int soc = rs.getInt("사회");
 		int sci = rs.getInt("과학");
-		return new StudentScoreAll(kor, eng, math, soc, sci);
+		return new StudentScoreAll(stdNo, kor, eng, math, soc, sci);
 	}
 
 	@Override
@@ -169,4 +170,6 @@ public class StudentScoreAllImpl implements StudentScoreAllDao {
 		}
 		return null;
 	}
+
+
 }

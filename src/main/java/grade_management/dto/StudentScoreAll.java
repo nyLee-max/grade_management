@@ -16,6 +16,17 @@ public class StudentScoreAll {
 
 
 	
+	public StudentScoreAll(int stdNo, int kor, int eng, int math, int soc, int sci) {
+		this.stdNo = stdNo;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		this.soc = soc;
+		this.sci = sci;
+	}
+
+
+
 	public StudentScoreAll(int kor, int eng, int math, int soc, int sci) {
 		this.kor = kor;
 		this.eng = eng;

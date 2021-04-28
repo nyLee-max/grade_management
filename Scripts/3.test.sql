@@ -10,3 +10,13 @@ select s.stdNo as stdNo, stdName,classCode ,enterDate , PhotoName , stdPhoto ,
         JOIN Score sco ON s.stdNo = sco.stdNo
         JOIN Subject sub ON sco.subNo = sub.subNo
    group by s.stdNo;
+   
+ select * from vw_student_table;
+ 
+select stdNo, 국어, 영어, 수학, 사회, 과학 from vw_student_table where stdNo = 20001;
+
+select * from score where stdNo = 6565;
+select * from student where stdNo = 6565;
+select * from subject;
+
+update score set subNo = ?, stdScore = ? where stdNo = ?
