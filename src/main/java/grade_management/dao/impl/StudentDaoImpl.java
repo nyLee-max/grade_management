@@ -141,7 +141,6 @@ public class StudentDaoImpl implements StudentDao {
 			pstmt.setInt(1, student.getStdNo());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

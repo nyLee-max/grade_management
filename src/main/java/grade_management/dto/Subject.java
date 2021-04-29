@@ -36,7 +36,7 @@ public class Subject {
 	
 	@Override
 	public String toString() {
-		return String.format("%s" , subNo);
+		return String.format("%s" , subName);
 	}
 
 	@Override

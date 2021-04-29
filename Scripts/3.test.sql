@@ -18,5 +18,11 @@ select stdNo, 국어, 영어, 수학, 사회, 과학 from vw_student_table where
 select * from score where stdNo = 6565;
 select * from student where stdNo = 6565;
 select * from subject;
+select * from score where stdNo = 20001;
 
-update score set subNo = ?, stdScore = ? where stdNo = ?
+delete from score where no = 220
+
+
+select * from score where stdNo = 20031;
+
+delete from score where stdNo = 20031;

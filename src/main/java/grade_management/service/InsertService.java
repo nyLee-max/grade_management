@@ -26,4 +26,8 @@ public class InsertService {
 	public void modifyScore(Score score) {
 		scoredao.updateScore(score);
 	}
+	
+	public void deleteStudent(Student student) {
+		dao.deleteStudent(student);
+	}
 }

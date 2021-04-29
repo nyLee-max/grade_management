@@ -1,11 +1,13 @@
 package grade_management.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -20,9 +22,11 @@ public class ScoreManagerUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private ScorePanel ScorePanel;
-	private JButton btnNewButton;
+	private JButton btnUpdate;
 	private InsertService service;
 	private StudentTablePanel table;
+	private JButton btnAdd;
+	private JButton btnDelete;
 
 	public ScoreManagerUI() {
 		setService();
@@ -47,16 +51,27 @@ public class ScoreManagerUI extends JFrame implements ActionListener {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		btnNewButton = new JButton("수정");
-		btnNewButton.addActionListener(this);
-		panel_1.add(btnNewButton);
+		btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(this);
 		
-		JButton btnNewButton_1 = new JButton("삭제");
-		panel_1.add(btnNewButton_1);
+		btnAdd = new JButton("추가");
+		btnAdd.addActionListener(this);
+		panel_1.add(btnAdd);
+		panel_1.add(btnUpdate);
+		
+		btnDelete = new JButton("삭제");
+		btnDelete.addActionListener(this);
+		panel_1.add(btnDelete);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton) {
+		if (e.getSource() == btnDelete) {
+			actionPerformedBtnDelete(e);
+		}
+		if (e.getSource() == btnAdd) {
+			actionPerformedBtnAdd(e);
+		}
+		if (e.getSource() == btnUpdate) {
 			actionPerformedBtnNewButton(e);
 		}
 	}
@@ -81,6 +96,9 @@ public class ScoreManagerUI extends JFrame implements ActionListener {
 		service.modifyScore(sciInput);
 		
 		table.loadData();
+		
+		JOptionPane.showMessageDialog(null, "성적정보가 수정되었습니다.");
+
 	}
 	public void setTable(StudentTablePanel table) {
 		this.table = table;
@@ -93,4 +111,25 @@ public class ScoreManagerUI extends JFrame implements ActionListener {
 	}
 	
 	
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		Student stdNo = ScorePanel.getStdNo();
+		int kor = ScorePanel.getKor();
+		int eng = ScorePanel.getEng();
+		int math = ScorePanel.getMath();
+		int sci = ScorePanel.getSci();
+		int soc = ScorePanel.getSoc();
+		Score korInput = new Score(stdNo, new Subject(1), kor);
+		service.addScore(korInput);
+		Score engInput = new Score(stdNo, new Subject(2), eng);
+		service.addScore(engInput);
+		Score mathInput = new Score(stdNo,new Subject(3), math);
+		service.addScore(mathInput);
+		Score socInput = new Score(stdNo, new Subject(4), soc);
+		service.addScore(socInput);
+		Score sciInput = new Score(stdNo, new Subject(5), sci);
+		service.addScore(sciInput);
+	}
+	protected void actionPerformedBtnDelete(ActionEvent e) {
+		ScorePanel.clearTf();
+	}
 }

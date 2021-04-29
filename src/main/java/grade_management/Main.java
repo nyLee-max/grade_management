@@ -124,6 +124,7 @@ public class Main extends JFrame implements ActionListener {
 		SearchAllManagerUI frame = new SearchAllManagerUI();
 		frame.setVisible(true);
 	}
+	
 	protected void actionPerformedBtnNewButton_1(ActionEvent e) {
 		ScoreManagerUI frame = new ScoreManagerUI();
 		frame.setVisible(true);

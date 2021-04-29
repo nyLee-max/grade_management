@@ -40,7 +40,7 @@ public class StudentManagerUI extends JFrame implements ActionListener {
 		initialize();
 	}
 	private void initialize() {
-		setTitle("학생성적입력");
+		setTitle("학생정보입력");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 567, 436);
 		contentPane = new JPanel();
@@ -108,7 +108,6 @@ public class StudentManagerUI extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedBtnClear(ActionEvent e) {
 		pLeftPanel.clearTf();
-//		pRightPanel.clearTf();
 	}
 
 	public StudentPanel getpLeftPanel() {
